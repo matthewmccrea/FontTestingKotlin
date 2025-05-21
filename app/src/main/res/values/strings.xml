@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">TestingApp</string>
+    <array name="com_google_android_gms_fonts_certs">
+        <item>@array/google_fonts_certs</item>
+    </array>
+
+    <string-array name="google_fonts_certs">
+        <item>
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuZ/JwC90
+            +Z6w1XL3vOxdsGqJ65vxjzG2Gkt+vWcYx2x1txCvMo6XBz/2jMzs
+            rR9kVHb+EjSTaT3RRiEjZYWT6Y8ToxNOKgqkMvv8yb+ON42P4bnN
+            +6CkN5s3mEvQe7b+ZDA0/YqpRn5SrpoROez5BfqFGOaQUPH2LZsZ
+            kpxbXEOI1Pdy8wlPa5fdrn1eycKwcKBlT9YEQIDAQAB
+        </item>
+    </string-array>
+</resources>
