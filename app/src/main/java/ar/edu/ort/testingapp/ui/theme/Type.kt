@@ -12,7 +12,11 @@ import androidx.compose.ui.text.googlefonts.GoogleFont.Provider
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.font.FontWeight
 
+<<<<<<< HEAD
 val fontName = GoogleFont("Poppins")
+=======
+val fontName = GoogleFont("Lobster Two")
+>>>>>>> 3355da1 (Testing fonts)
 
 val provider = GoogleFont.Provider(
     providerAuthority = "com.google.android.gms.fonts",
