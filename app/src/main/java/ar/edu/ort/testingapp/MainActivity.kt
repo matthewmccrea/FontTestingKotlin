@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -15,11 +16,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -33,7 +37,17 @@ import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import ar.edu.ort.testingapp.ui.theme.TestingAppTheme
+import androidx.navigation.compose.rememberNavController
+import ar.edu.ort.testingapp.screens.FavouritesPage
+import ar.edu.ort.testingapp.screens.HomePage
+import ar.edu.ort.testingapp.screens.PeopleScreen
+import ar.edu.ort.testingapp.screens.QuoteScreen
+import ar.edu.ort.testingapp.screens.SettingsPage
 
 
 class MainActivity : ComponentActivity() {
@@ -41,88 +55,118 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+
            MainApp()
+
         }
     }
 }
 
 @Composable
 fun MainApp() {
-    TestingAppTheme {
-        Scaffold(
-            modifier = Modifier.fillMaxSize(),
-            bottomBar = {
-                BottomBarCustom()
-            }
+    val navController = rememberNavController()
+    TestingAppTheme{
+    Scaffold(
+        bottomBar = { BottomBarCustom(navController) }
+    ) { innerPadding ->
+        AppNavGraph(navController = navController, innerPadding = innerPadding)
+    }
+    }
+}
 
 
-        ) { innerPadding ->
+
+@Composable
+fun AppNavGraph(navController: NavHostController, innerPadding: PaddingValues) {
+    NavHost(
+        navController = navController,
+        startDestination = "home",
+        modifier = Modifier.padding(innerPadding)
+    ) {
+        composable("home") {
             HomePage(modifier = Modifier.padding(innerPadding))
         }
+        composable("favourite") {
+            FavouritesPage(modifier = Modifier.padding(innerPadding))
+        }
+        composable("settings") {
+            SettingsPage(modifier = Modifier.padding(innerPadding))
+        }
+        composable("people") {
+            PeopleScreen(modifier = Modifier.padding(innerPadding))
+        }
+        composable("quote") {
+            QuoteScreen(modifier = Modifier.padding(innerPadding))
+        }
     }
 }
 
-
 @Composable
-fun HomePage(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+fun BottomBarCustom(navController: NavController) {
+    BottomAppBar {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.homepage),
-                contentDescription = "Banner de bienvenida",
-                modifier = Modifier.fillMaxWidth(fraction = 0.7f)
-                    .aspectRatio(ratio = 1f)
-            )
+            IconButton(onClick = {
+                navController.navigate("home") {
+                    popUpTo("home") { inclusive = false }
+                    launchSingleTop = true
+                }
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Home,
+                    contentDescription = "Home"
+                )
+            }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            IconButton(onClick = {
+                navController.navigate("favourite") {
+                    popUpTo("home") { inclusive = false }
+                    launchSingleTop = true
+                }
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Favorite,
+                    contentDescription = "Favourite"
+                )
+            }
 
-            Text(
-                text = "Login here",
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
+            IconButton(onClick = {
+                navController.navigate("settings") {
+                    popUpTo("home") { inclusive = false }
+                    launchSingleTop = true
+                }
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Settings,
+                    contentDescription = "Settings"
+                )
+            }
 
-            Text(
-                text = "Welcome back you've been missed",
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
-            Text(
-                text = "Esto es un titulo pero bien finito",
-                style = MaterialTheme.typography.labelSmall,
-                textAlign = TextAlign.Center
-            )
+            IconButton(onClick = {
+                navController.navigate("people") {
+                    popUpTo("people") { inclusive = false }
+                    launchSingleTop = true
+                }
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.AccountBox,
+                    contentDescription = "People"
+                )
+            }
+            IconButton(onClick = {
+                navController.navigate("quote") {
+                    popUpTo("quote") { inclusive = false }
+                    launchSingleTop = true
+                }
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Info,
+                    contentDescription = "Quote"
+                )
+            }
         }
-    }
-}
-
-@Composable
-fun BottomBarCustom (){
-    BottomAppBar{
-    Row(modifier = Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.SpaceEvenly) {
-            Icon(imageVector = Icons.Filled.Home, contentDescription = "Home")
-            Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favourite")
-            Icon(imageVector = Icons.Filled.Settings, contentDescription = "Settings")
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomePagePreview() {
-    TestingAppTheme(
-
-    ) {
-        HomePage()
     }
 }
 

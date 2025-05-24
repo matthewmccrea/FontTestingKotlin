@@ -12,7 +12,9 @@ import androidx.compose.ui.text.googlefonts.GoogleFont.Provider
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.font.FontWeight
 
-val fontName = GoogleFont("Lobster Two")
+val fontName = GoogleFont("Poppins")
+
+val fontNameTwo = GoogleFont("Lobster Two")
 
 
 val provider = GoogleFont.Provider(
@@ -30,10 +32,19 @@ val fontFamilyPoppins = FontFamily(
     Font(googleFont = fontName, fontProvider = provider, weight = FontWeight.SemiBold)
 )
 
+val fontFamilyLobster = FontFamily(
+    Font(googleFont = fontNameTwo, fontProvider = provider, weight = FontWeight.Light),
+    Font(googleFont = fontNameTwo, fontProvider = provider, weight = FontWeight.Normal),
+    Font(googleFont = fontNameTwo, fontProvider = provider, weight = FontWeight.Medium),
+    Font(googleFont = fontNameTwo, fontProvider = provider, weight = FontWeight.SemiBold)
+)
+
+
+
 
 val typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = fontFamilyPoppins,
+        fontFamily = fontFamilyLobster,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
