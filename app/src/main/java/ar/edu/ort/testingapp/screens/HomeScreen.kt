@@ -1,5 +1,4 @@
 package ar.edu.ort.testingapp.screens
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

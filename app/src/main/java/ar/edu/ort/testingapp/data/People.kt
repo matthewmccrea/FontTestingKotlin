@@ -1,5 +1,4 @@
 package ar.edu.ort.testingapp.data
-
 import androidx.compose.runtime.Immutable
 import kotlinx.serialization.Serializable
 

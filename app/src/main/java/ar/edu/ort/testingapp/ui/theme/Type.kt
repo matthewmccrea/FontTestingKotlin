@@ -1,14 +1,10 @@
 package ar.edu.ort.testingapp.ui.theme
-
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.sp
 import ar.edu.ort.testingapp.R
 import androidx.compose.ui.text.googlefonts.GoogleFont
-import androidx.compose.ui.text.googlefonts.GoogleFont.Provider
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.font.FontWeight
 
@@ -40,7 +36,13 @@ val fontFamilyLobster = FontFamily(
 )
 
 
-
+val quoteTitleStyle = TextStyle(
+    fontFamily = fontFamilyPoppins,
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 20.sp,
+    lineHeight = 16.sp,
+    letterSpacing = 0.5.sp
+)
 
 val typography = Typography(
     bodyLarge = TextStyle(
@@ -65,6 +67,7 @@ val typography = Typography(
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
     )
+
 )
 
 
