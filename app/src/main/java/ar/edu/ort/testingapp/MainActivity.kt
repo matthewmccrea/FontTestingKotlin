@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -31,6 +32,7 @@ import ar.edu.ort.testingapp.screens.HomePage
 import ar.edu.ort.testingapp.screens.PeopleScreen
 import ar.edu.ort.testingapp.screens.QuoteScreen
 import ar.edu.ort.testingapp.screens.SettingsPage
+import ar.edu.ort.testingapp.screens.BookScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -81,6 +83,9 @@ fun AppNavGraph(navController: NavHostController, innerPadding: PaddingValues) {
         }
         composable("quote") {
             QuoteScreen(modifier = Modifier.padding(innerPadding))
+        }
+        composable("book") {
+            BookScreen(modifier = Modifier.padding(innerPadding))
         }
     }
 }
@@ -148,6 +153,17 @@ fun BottomBarCustom(navController: NavController) {
                 Icon(
                     imageVector = Icons.Filled.Info,
                     contentDescription = "Quote"
+                )
+            }
+            IconButton(onClick = {
+                navController.navigate("book") {
+                    popUpTo("book") { inclusive = false }
+                    launchSingleTop = true
+                }
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.DateRange,
+                    contentDescription = "Book"
                 )
             }
         }
